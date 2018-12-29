@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeywordCollector.Option;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,9 @@ namespace KeywordCollector.Collector
 {
     public interface ICollector
     {
+        Options Options { get;}
         string CurrentUrl { get; set; }
-        Task<List<ResultItem>> FecthUrls(string keyword);
+        List<ResultItem> FecthUrls();
+        void Close();
     }
 }

@@ -9,6 +9,7 @@ namespace KeywordCollector.Collector
     public class ResultItem
     {
         public int Index { get; set; }
-        public string Url { get; set; }
+        public string OriginUrl { get; set; }
+        public SearchEngineType SearchType { get; set; }
     }
 }

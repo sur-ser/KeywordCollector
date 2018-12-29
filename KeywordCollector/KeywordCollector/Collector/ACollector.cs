@@ -13,34 +13,39 @@ namespace KeywordCollector.Collector
     {
         public string CurrentUrl { get; set; }
         public bool Complete { get; protected set; }
-        private Options Options { get; set; }
+        public Options Options { get;}
         protected ChromeDriver WebDriver { get; set; }
+        protected int Index { get; set; }
+        protected int PageIndex { get; set; }
+        protected LinkedList<string> NextPages { get; }
 
         public ACollector(Options options)
         {
             this.Options = options;
+            this.CurrentUrl = options.MailUrl;
+            this.NextPages = new LinkedList<string>();
             this.WebDriver = new ChromeDriver();
         }
 
-        protected abstract Task<List<ResultItem>> ImplementFecthUrls(string keyword);
-        protected abstract Task LoadNextPage();
+        protected abstract List<ResultItem> ImplementFecthUrls(string keyword);
+        protected abstract void LoadNextPage();
         protected abstract List<ResultItem> GetResultItems();
 
-        public Task<List<ResultItem>> FecthUrls(string keyword)
+        public List<ResultItem> FecthUrls()
         {
-            return ImplementFecthUrls(keyword);
+            return ImplementFecthUrls(this.Options.Keyword);
         }
 
-        protected async Task LoadMainPage()
+        protected abstract void LoadMainPage();
+
+        public void Close()
         {
-            await Task.Run(() =>
+            try
             {
-                try
-                {
-                    WebDriver.Navigate().GoToUrl(this.CurrentUrl);
-                }
-                catch { }
-            });
+                this.WebDriver.Close();
+                this.WebDriver.Quit();
+            }
+            catch { }
         }
     }
 }
