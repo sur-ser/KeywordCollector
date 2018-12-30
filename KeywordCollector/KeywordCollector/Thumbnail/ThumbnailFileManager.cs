@@ -1,6 +1,8 @@
 ﻿using KeywordCollector.Collector;
 using KeywordCollector.Entites;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,7 +27,7 @@ namespace KeywordCollector.Thumbnail
         public static ConcurrentDictionary<ResultItem, UrlEntity> UrlEntitys { get; } = new ConcurrentDictionary<ResultItem, UrlEntity>();
         static ThumbnailFileManager()
         {
-            for(var i = 0; i < DriversOfStart; i++)
+            for (var i = 0; i < DriversOfStart; i++)
             {
                 var driver = new ChromeDriver();
                 ChromeDrivers.Add(driver);
@@ -37,13 +39,12 @@ namespace KeywordCollector.Thumbnail
         {
             ItemQueue.Enqueue(item);
         }
-               
-        private static async void Working(ChromeDriver driver)
+
+        private static void Working(ChromeDriver driver)
         {
-            //设置5秒钟超时
-            driver.Manage().Timeouts().PageLoad = new TimeSpan(0,0,0,0,5000);
-            await Task.Run(() =>
+            Task.Run(() =>
             {
+                Actions action = new Actions(driver);
                 while (!Exit)
                 {
                     if (!ItemQueue.TryDequeue(out ResultItem item))
@@ -53,12 +54,8 @@ namespace KeywordCollector.Thumbnail
                     }
                     try
                     {
-                        try
-                        {
-                            driver.Navigate().GoToUrl(item.OriginUrl);
-                        }
-                        catch { }
-    
+                        driver.Navigate().GoToUrl(item.OriginUrl);
+
                         var fileName = $"{item.OriginUrl.GetHashCode()}{item.Index}{item.SearchType}.png";
                         var path = $"{Directory.GetCurrentDirectory()}\\images\\";
                         if (!Directory.Exists(path))
@@ -70,7 +67,8 @@ namespace KeywordCollector.Thumbnail
                         {
                             File.Delete(fullName);
                         }
-                        driver.GetScreenshot().SaveAsFile(fullName, OpenQA.Selenium.ScreenshotImageFormat.Png);
+
+                        driver.GetScreenshot().SaveAsFile(fullName, ScreenshotImageFormat.Png);
 
                         UrlEntitys.TryAdd(item, new UrlEntity
                         {
@@ -80,10 +78,74 @@ namespace KeywordCollector.Thumbnail
                             ThumbnailFileName = fileName,
                         });
                     }
-                    catch{ }
+                    catch
+                    {
+                        ChromeDrivers.Remove(driver);
+                        try
+                        {
+                            driver.Close();
+                        }
+                        catch { }
+                        try
+                        {
+                            driver.Quit();
+                        }
+                        catch { }
+                        driver = new ChromeDriver();
+                        ChromeDrivers.Add(driver);
+                    }
+
                 }
             });
         }
+
+
+
+        //private static void Handle(ChromeDriver driver, ResultItem item)
+        //{
+        //    Task.Run(() =>
+        //    {
+        //        try
+        //        {
+        //            driver.ExecuteScript($"window.open('{item.OriginUrl}','_blank');");
+
+        //            var handle = driver.WindowHandles[driver.WindowHandles.Count - 1];
+        //            var target = driver.SwitchTo().Window(handle.ToString());
+
+        //            //target.Navigate().GoToUrl(item.OriginUrl);
+
+        //            var fileName = $"{item.OriginUrl.GetHashCode()}{item.Index}{item.SearchType}.png";
+        //            var path = $"{Directory.GetCurrentDirectory()}\\images\\";
+        //            if (!Directory.Exists(path))
+        //            {
+        //                Directory.CreateDirectory(path);
+        //            }
+        //            var fullName = $"{path}{fileName}";
+        //            if (File.Exists(fullName))
+        //            {
+        //                File.Delete(fullName);
+        //            }
+
+        //            Thread.Sleep(5000);
+        //            var name = handle.ToString();
+        //            driver.SwitchTo().Window(name);
+        //            driver.GetScreenshot().SaveAsFile(fullName, ScreenshotImageFormat.Png);
+
+        //            UrlEntitys.TryAdd(item, new UrlEntity
+        //            {
+        //                engineType = item.SearchType,
+        //                CollectIndex = item.Index,
+        //                Url = target.Url,
+        //                ThumbnailFileName = fileName,
+        //            });
+
+        //            target.Close();
+
+        //        }
+        //        catch { }
+
+        //    });
+        //}
 
         public static void Close()
         {

@@ -278,11 +278,14 @@ namespace KeywordCollector
         {
             var index = int.Parse(this.txtCurrent.Text);
             if (index == 1)
-                return;
-
-            index--;
+            {
+                index = 1;
+            }
+            else
+            {
+                index--;
+            }
             this.txtCurrent.Text = index.ToString();
-
             var pageList = GetPageList(this.UrlEntites.Values, index, 20);
             SetSelectList(pageList);
         }
@@ -290,8 +293,6 @@ namespace KeywordCollector
         private void btnNext_Click(object sender, EventArgs e)
         {
             var index = int.Parse(this.txtCurrent.Text);
-            if (index == 1)
-                return;
 
             index++;
             this.txtCurrent.Text = index.ToString();
