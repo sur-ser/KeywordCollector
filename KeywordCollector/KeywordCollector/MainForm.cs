@@ -216,6 +216,15 @@ namespace KeywordCollector
                     var key = lbSelect.Items[i].ToString();
                     //修改选择状态
                     this.UrlEntites[key].Selected = !curChecked;
+
+                    this.lbCurrentSelectUrl.Links.Clear();
+                    this.lbCurrentSelectUrl.Links.Add(0, key.Length, key);
+                    this.lbCurrentSelectUrl.Text = key;
+
+                    var path = $"{Directory.GetCurrentDirectory()}\\images\\";
+                    var fullName = $"{path}{this.UrlEntites[key].ThumbnailFileName}";
+                    ShowThumbnail(fullName);
+
                     break;
                 }
             }
