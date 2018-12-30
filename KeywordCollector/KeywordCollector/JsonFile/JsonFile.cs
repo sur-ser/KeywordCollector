@@ -10,7 +10,7 @@ namespace KeywordCollector.JsonFile
 {
     public class JsonFileClass
     {
-        public static async Task InsertAsync(string fileName, UrlEntity entity)
+        public static void Insert(string fileName, UrlEntity entity)
         {
             using(var sm = File.Open(fileName, FileMode.OpenOrCreate))
             {
@@ -18,8 +18,8 @@ namespace KeywordCollector.JsonFile
                 using (var sw = new StreamWriter(sm))
                 {
                     var json = Newtonsoft.Json.JsonConvert.SerializeObject(entity, Newtonsoft.Json.Formatting.None);
-                    await sw.WriteLineAsync(json);
-                    await sw.FlushAsync();
+                    sw.WriteLine(json);
+                    sw.Flush();
                 }
             }
         }

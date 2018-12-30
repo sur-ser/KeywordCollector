@@ -109,7 +109,7 @@ namespace KeywordCollector
             ThumbnailFileManager.Close();
         }
 
-        private async void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             var deletes = new List<ResultItem>();
             var kvs = ThumbnailFileManager.UrlEntitys;
@@ -122,7 +122,7 @@ namespace KeywordCollector
                     Directory.CreateDirectory(path);
                 }
                 var fullName = $"{path}{fileName}.txt";
-                await JsonFileClass.InsertAsync(fullName, kv.Value);
+                JsonFileClass.Insert(fullName, kv.Value);
                 deletes.Add(kv.Key);
             }
 

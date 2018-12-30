@@ -93,7 +93,11 @@ namespace KeywordCollector.Collector
             var url = this.NextPages.First();
             if (!string.IsNullOrEmpty(url))
             {
-                this.WebDriver.Navigate().GoToUrl(url);
+                try
+                {
+                    this.WebDriver.Navigate().GoToUrl(url);
+                }
+                catch { }
                 this.CurrentUrl = this.WebDriver.Url;
             }
             this.NextPages.RemoveFirst();
@@ -163,9 +167,16 @@ namespace KeywordCollector.Collector
         {
             try
             {
-                WebDriver.Navigate().GoToUrl(this.CurrentUrl);
+                try
+                {
+                    WebDriver.Navigate().GoToUrl(this.CurrentUrl);
+
+                }
+                catch { }
+
                 var searchTxtElement = this.WebDriver.FindElementByCssSelector("#kw");
                 searchTxtElement.SendKeys(this.Options.Keyword);
+
                 var searchBtnElement = this.WebDriver.FindElementByCssSelector("#su");
                 searchBtnElement.Click();
                 this.CurrentUrl = this.WebDriver.Url;

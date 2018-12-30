@@ -40,6 +40,8 @@ namespace KeywordCollector.Thumbnail
                
         private static async void Working(ChromeDriver driver)
         {
+            //设置5秒钟超时
+            driver.Manage().Timeouts().PageLoad = new TimeSpan(0,0,0,0,5000);
             await Task.Run(() =>
             {
                 while (!Exit)
@@ -50,9 +52,13 @@ namespace KeywordCollector.Thumbnail
                         continue;
                     }
                     try
-                    {                        
-                        driver.Navigate().GoToUrl(item.OriginUrl);
-
+                    {
+                        try
+                        {
+                            driver.Navigate().GoToUrl(item.OriginUrl);
+                        }
+                        catch { }
+    
                         var fileName = $"{item.OriginUrl.GetHashCode()}{item.Index}{item.SearchType}.png";
                         var path = $"{Directory.GetCurrentDirectory()}\\images\\";
                         if (!Directory.Exists(path))
@@ -74,18 +80,7 @@ namespace KeywordCollector.Thumbnail
                             ThumbnailFileName = fileName,
                         });
                     }
-                    catch
-                    {
-                        ChromeDrivers.Remove(driver);
-                        try
-                        {
-                            driver.Close();
-                            driver.Quit();
-                        }
-                        catch { }
-                        driver = new ChromeDriver();
-                        ChromeDrivers.Add(driver);
-                    }
+                    catch{ }
                 }
             });
         }
