@@ -222,6 +222,10 @@ namespace KeywordCollector
                     var key = lbSelect.Items[i].ToString();
                     //修改选择状态
                     this.UrlEntites[key].Selected = !curChecked;
+
+                    var path = $"{Directory.GetCurrentDirectory()}\\images\\";
+                    var fullName = $"{path}{this.UrlEntites[key].ThumbnailFileName}";
+                    ShowThumbnail(fullName);
                     break;
                 }
             }
