@@ -90,6 +90,12 @@ namespace KeywordCollector.Collector
                 SetNextPages();
             }
 
+            if (!this.NextPages.Any())
+            {
+                this.Complete = true;
+                return;
+            }
+
             var url = this.NextPages.First();
             if (!string.IsNullOrEmpty(url))
             {

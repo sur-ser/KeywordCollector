@@ -1,1 +1,5 @@
 /KeywordCollector/bin/Debug/images/*.png
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
