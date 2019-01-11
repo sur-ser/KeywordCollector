@@ -11,3 +11,16 @@ F:\新建文件夹\spider\spider\KeywordCollector\obj\Debug\KeywordCollector.csp
 F:\新建文件夹\spider\spider\KeywordCollector\obj\Debug\KeywordCollector.csproj.CopyComplete
 F:\新建文件夹\spider\spider\KeywordCollector\obj\Debug\KeywordCollector.exe
 F:\新建文件夹\spider\spider\KeywordCollector\obj\Debug\KeywordCollector.pdb
+D:\Project\KeywordCollector\bin\Debug\简单说明.docx
+D:\Project\KeywordCollector\bin\Debug\清空缓存.bat
+D:\Project\KeywordCollector\bin\Debug\KeywordCollector.exe.config
+D:\Project\KeywordCollector\bin\Debug\KeywordCollector.exe
+D:\Project\KeywordCollector\bin\Debug\KeywordCollector.pdb
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.csprojAssemblyReference.cache
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.MainForm.resources
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.Properties.Resources.resources
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.csproj.GenerateResource.cache
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.csproj.CoreCompileInputs.cache
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.csproj.CopyComplete
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.exe
+D:\Project\KeywordCollector\KeywordCollector\obj\Debug\KeywordCollector.pdb

@@ -109,27 +109,12 @@ namespace KeywordCollector
                 {
                     var options = new Options
                     {
-<<<<<<< HEAD
                         MainUrl = "https://www.sogou.com",
                         Keyword = keyword,
                         MaxCollect = 100000,
                         SearchType = SearchEngineType.Sogou,
                     };
                     collector = new SogouCollector(options);
-=======
-                        lbSelect.SetSelected(i, false);
-                    }
-                    lbSelect.SetItemChecked(i, !curChecked);
-
-                    var key = lbSelect.Items[i].ToString();
-                    //修改选择状态
-                    this.UrlEntites[key].Selected = !curChecked;
-
-                    var path = $"{Directory.GetCurrentDirectory()}\\images\\";
-                    var fullName = $"{path}{this.UrlEntites[key].ThumbnailFileName}";
-                    ShowThumbnail(fullName);
-                    break;
->>>>>>> 03f4c570e37ef1f5c0a4f95dd57e981ecbfda31d
                 }
 
                 if(collector != null)
