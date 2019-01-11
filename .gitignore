@@ -1,1 +1,13 @@
-/KeywordCollector/bin/Debug/images/*.png
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+*.suo
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.png
+/KeywordCollector/bin
+obj
+bin
