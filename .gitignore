@@ -1,13 +1,20 @@
+<<<<<<< HEAD
 ﻿################################################################################
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
 *.suo
+=======
+/KeywordCollector/bin/Debug/images/*.png
+>>>>>>> 03f4c570e37ef1f5c0a4f95dd57e981ecbfda31d
 *.lock
 *.ide
 *.ide-shm
 *.ide-wal
+<<<<<<< HEAD
 *.png
 /KeywordCollector/bin
 obj
 bin
+=======
+>>>>>>> 03f4c570e37ef1f5c0a4f95dd57e981ecbfda31d
